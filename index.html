@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="assets/css/normalize.css">
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/animations.css">
 </head>
@@ -17,20 +17,45 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <a ng-click="setCurrentCategory(null)">Reset</a>
+        <a ng-click="setCurrentCategory(null)">All</a>
         <ul class="nav nav-sidebar">
           <li ng-repeat="category in categories" ng-class="{'active':isCurrentCategory(category)}">
             <a ng-click="setCurrentCategory(category)">
-                                {{category.name}}
-                            </a>
+                {{category.name}}
+            </a>
           </li>
         </ul>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div ng-class="{active: isSelectedTodo(todo.id)}" ng-repeat="todo in todos | filter:{category:currentCategory.name}">
-          <button type="button" class="close">&times;</button>
-          <button type="button" class="btn btn-link" ng-click="setEditedTodo(todo); startEditing();"><span class="glyphicon glyphicon-pencil"></span></button>
-          <a href="#" target="_blank">{{todo.title}}</a>
+        <div class="filter-header">
+          <form class="search-form">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search by number of days" ng-model="searchQuery">
+              </div>
+            </div>
+          </form>
+          <span>Sort by:</span>
+          <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="filter-btn">
+            Title
+            <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+          <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse" class="filter-btn">
+              Date
+              <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </div>
+
+        <div ng-class="{active: isSelectedTodo(todo.id)}" ng-repeat="todo in todos | orderBy :sortType : sortReverse | filter:{category:currentCategory.name} | filter: filterDate  ">
+          <div>
+            <button type="button" class="close" ng-click="deleteTodo(todo)">&times;</button>
+            <button type="button" class="btn btn-link" ng-click="setEditedTodo(todo); startEditing();"><span class="glyphicon glyphicon-pencil"></span></button>
+            <a href="#" target="_blank" class="todo-item">{{todo.title}}</a>
+            <span>{{todo.date | date:"yyyy-MM-dd"}}</span>
+          </div>
         </div>
 
         <hr/>
