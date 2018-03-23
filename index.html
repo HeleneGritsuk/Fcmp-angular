@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="AngularApp">
+<html ng-app="myapp">
 
 <head>
   <meta charset="utf-8">
@@ -17,14 +17,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <a ng-click="setCurrentCategory(null)">All</a>
-        <ul class="nav nav-sidebar">
-          <li ng-repeat="category in categories" ng-class="{'active':isCurrentCategory(category)}">
-            <a ng-click="setCurrentCategory(category)">
-                {{category.name}}
-            </a>
-          </li>
-        </ul>
+        <h1>My todos</h1>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="filter-header">
@@ -48,16 +41,24 @@
               <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </div>
-
-        <div ng-class="{active: isSelectedTodo(todo.id)}" ng-repeat="todo in todos | orderBy :sortType : sortReverse | filter:{category:currentCategory.name} | filter: filterDate  ">
+        <div>Done todos</div>
+        <div ng-class="{active: isSelectedTodo(todo.id)}" ng-repeat="todo in todos | orderBy :sortType : sortReverse | filter:{status: true} | filter: filterDate  ">
           <div>
             <button type="button" class="close" ng-click="deleteTodo(todo)">&times;</button>
             <button type="button" class="btn btn-link" ng-click="setEditedTodo(todo); startEditing();"><span class="glyphicon glyphicon-pencil"></span></button>
-            <a href="#" target="_blank" class="todo-item">{{todo.title}}</a>
+            <a class="todo-item todo-item--done" ng-click="toggleTodo(todo);">{{todo.title}}</a>
             <span>{{todo.date | date:"yyyy-MM-dd"}}</span>
           </div>
         </div>
-
+        <div>New todos</div>
+        <div ng-class="{active: isSelectedTodo(todo.id)}" ng-repeat="todo in todos | orderBy :sortType : sortReverse | filter:{status:false} | filter: filterDate  ">
+          <div>
+            <button type="button" class="close" ng-click="deleteTodo(todo)">&times;</button>
+            <button type="button" class="btn btn-link" ng-click="setEditedTodo(todo); startEditing();"><span class="glyphicon glyphicon-pencil"></span></button>
+            <a class="todo-item" ng-click="toggleTodo(todo);">{{todo.title}}</a>
+            <span>{{todo.date | date:"yyyy-MM-dd"}}</span>
+          </div>
+        </div>
         <hr/>
         <div ng-if="shouldShowCreating()">
           <button type="button" class="btn btn-link" ng-click="startCreating()">
@@ -89,14 +90,19 @@
         </div>
       </div>
     </div>
+
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
-
+  <script src="https://unpkg.com/@uirouter/angularjs@1.0.15/release/angular-ui-router.min.js"></script>
   <script src="app/app.js"></script>
+  <script src="app/todos/todos.js"></script>
+  <script src="app/todos/create/todo-create.js"></script>
+  <script src="app/todos/edit/todo-edit.js"></script>
+  <script src="app/common/models/todos-model.js"></script>
 </body>
 
 </html>
