@@ -14,15 +14,15 @@ angular.module('myapp', [
     .controller('MainCtrl', function ($scope) {
 
         $scope.todos = [
-            {"id": 0, "title": "Hit the gym", "status": true, "date": new Date(2018, 00, 22) },
-            {"id": 1, "title": "Bye bananas", "status": true, "date": new Date(2018, 01, 12) },
-            {"id": 2, "title": "Read you dont know JS book", "status": false, "date": new Date(2017, 01, 22) },
-            {"id": 3, "title": "Not getting enough sleep", "status": true, "date": new Date(2018, 02, 05) },
-            {"id": 4, "title": "Finish frontcamp and survive", "status": false, "date": new Date(2018, 02, 10) },
-            {"id": 5, "title": "Start read JS book", "status": true, "date": new Date(2018, 02, 24) },
-            {"id": 6, "title": "Get a promotion",  "status": false, "date": new Date(2018, 03, 11) },
-            {"id": 7, "title": "go snowboarding",  "status": true, "date": new Date(2018, 01, 28) },
-            {"id": 8, "title": "Stay alive till Friday",  "status": false, "date": new Date(2018, 02, 17) }
+            {"id": 0, "title": "Hit the gym", "status": true, "date": new Date(2018, 0, 22) },
+            {"id": 1, "title": "Bye bananas", "status": true, "date": new Date(2018, 1, 12) },
+            {"id": 2, "title": "Read you dont know JS book", "status": false, "date": new Date(2017, 1, 22) },
+            {"id": 3, "title": "Not getting enough sleep", "status": true, "date": new Date(2018, 2, 5) },
+            {"id": 4, "title": "Finish frontcamp and survive", "status": false, "date": new Date(2018, 2, 10) },
+            {"id": 5, "title": "Start read JS book", "status": true, "date": new Date(2018, 2, 24) },
+            {"id": 6, "title": "Get a promotion",  "status": false, "date": new Date(2018, 3, 11) },
+            {"id": 7, "title": "go snowboarding",  "status": true, "date": new Date(2018, 1, 28) },
+            {"id": 8, "title": "Stay alive till Friday",  "status": false, "date": new Date(2018, 2, 17) }
         ];
 
         $scope.currentCategory = null;
