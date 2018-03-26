@@ -1,0 +1,8 @@
+<form class="create-form" name="createForm" role="form" ng-submit="createTodoCtrl.createTodo(createTodoCtrl.newTodo)" novalidate>
+  <div class="form-group">
+    <label for="newBookmarkTitle">Todo Title</label>
+    <input type="text" class="form-control" id="newBookmarkTitle" ng-model="createTodoCtrl.newTodo.title" placeholder="Enter title" required ng-minlength="10">
+  </div>
+  <button type="submit" class="btn btn-info btn-lg" ng-disabled="createForm.$invalid">Create</button>
+  <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel</button>
+</form>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="AngularApp">
+<html ng-app="myapp">
 
 <head>
   <meta charset="utf-8">
@@ -13,80 +13,14 @@
   <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 
-<body ng-controller="MainCtrl">
+<body>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <a ng-click="setCurrentCategory(null)">All</a>
-        <ul class="nav nav-sidebar">
-          <li ng-repeat="category in categories" ng-class="{'active':isCurrentCategory(category)}">
-            <a ng-click="setCurrentCategory(category)">
-                {{category.name}}
-            </a>
-          </li>
-        </ul>
+        <h1>My todos</h1>
       </div>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="filter-header">
-          <form class="search-form">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                <input type="text" class="form-control" placeholder="Search by number of days" ng-model="searchQuery">
-              </div>
-            </div>
-          </form>
-          <span>Sort by:</span>
-          <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="filter-btn">
-            Title
-            <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
-          </a>
-          <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse" class="filter-btn">
-              Date
-              <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
-          </a>
-        </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view="todos">
 
-        <div ng-class="{active: isSelectedTodo(todo.id)}" ng-repeat="todo in todos | orderBy :sortType : sortReverse | filter:{category:currentCategory.name} | filter: filterDate  ">
-          <div>
-            <button type="button" class="close" ng-click="deleteTodo(todo)">&times;</button>
-            <button type="button" class="btn btn-link" ng-click="setEditedTodo(todo); startEditing();"><span class="glyphicon glyphicon-pencil"></span></button>
-            <a href="#" target="_blank" class="todo-item">{{todo.title}}</a>
-            <span>{{todo.date | date:"yyyy-MM-dd"}}</span>
-          </div>
-        </div>
-
-        <hr/>
-        <div ng-if="shouldShowCreating()">
-          <button type="button" class="btn btn-link" ng-click="startCreating()">
-              <span class="glyphicon glyphicon-plus"></span>
-              Create Todo
-          </button>
-          <form class="create-form" name="createForm" ng-show="isCreating" role="form" ng-submit="createTodo(newTodo)" novalidate>
-            <div class="form-group">
-              <label for="newBookmarkTitle">Todo Title</label>
-              <input type="text" class="form-control" id="newBookmarkTitle" ng-model="newTodo.title" placeholder="Enter title" required ng-minlength="10">
-            </div>
-            <button type="submit" class="btn btn-info btn-lg" ng-disabled="createForm.$invalid">Create</button>
-            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel</button>
-          </form>
-
-        </div>
-        <div ng-show="shouldShowEditing()">
-          <h4>Editing {{editedTodo.title}}</h4>
-
-          <form class="edit-form" role="form" ng-submit="updateTodo(editedTodo)" novalidate>
-            <div class="form-group">
-              <label>Todo Title</label>
-              <input type="text" class="form-control" ng-model="editedTodo.title" placeholder="Enter title" ng-minlength="10" required>
-            </div>
-
-            <button type="submit" class="btn btn-info btn-lg">Save</button>
-            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel</button>
-          </form>
-        </div>
       </div>
     </div>
   </div>
@@ -95,8 +29,12 @@
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
-
+  <script src="https://unpkg.com/@uirouter/angularjs@1.0.15/release/angular-ui-router.min.js"></script>
   <script src="app/app.js"></script>
+  <script src="app/todos/todos.js"></script>
+  <script src="app/todos/create/todo-create.js"></script>
+  <script src="app/todos/edit/todo-edit.js"></script>
+  <script src="app/common/models/todos-model.js"></script>
 </body>
 
 </html>

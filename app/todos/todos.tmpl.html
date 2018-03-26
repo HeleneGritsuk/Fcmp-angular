@@ -1,0 +1,46 @@
+<div class="filter-header">
+  <form class="search-form">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search by number of days" ng-model="searchQuery">
+      </div>
+    </div>
+  </form>
+  <span>Sort by:</span>
+  <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="filter-btn">
+    Title
+    <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+    <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+  </a>
+  <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse" class="filter-btn">
+      Date
+      <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+      <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+  </a>
+</div>
+<div>Done todos</div>
+<div ng-repeat="todo in todosCtrl.todos | orderBy :sortType : sortReverse | filter:{status: true} | filter: filterDate  ">
+  <div>
+    <button type="button" class="close" ng-click="todosCtrl.deleteTodo(todo)">&times;</button>
+    <button type="button" class="btn btn-link" ui-sref="myapp.todos.edit({todoId: todo.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+    <a class="todo-item todo-item--done" ng-click="todosCtrl.toggleTodo(todo);">{{todo.title}}</a>
+    <span>{{todo.date | date:"yyyy-MM-dd"}}</span>
+  </div>
+</div>
+<div>New todos</div>
+<div ng-repeat="todo in todosCtrl.todos | orderBy :sortType : sortReverse | filter:{status:false} | filter: filterDate  ">
+  <div>
+    <button type="button" class="close" ng-click="todosCtrl.deleteTodo(todo)">&times;</button>
+    <button type="button" class="btn btn-link" ui-sref="myapp.todos.edit({todoId: todo.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+    <a class="todo-item" ng-click="todosCtrl.toggleTodo(todo);">{{todo.title}}</a>
+    <span>{{todo.date | date:"yyyy-MM-dd"}}</span>
+  </div>
+</div>
+<hr/>
+<ui-view>
+  <button type="button" class="btn btn-link" ui-sref="myapp.todos.create">
+      <span class="glyphicon glyphicon-plus"></span>
+      Create Todo
+  </button>
+</ui-view>

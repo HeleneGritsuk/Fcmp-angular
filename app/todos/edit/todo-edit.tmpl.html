@@ -1,0 +1,11 @@
+<h4>Editing {{editTodoCtrl.todo.title}}</h4>
+
+<form class="edit-form" role="form" ng-submit="editTodoCtrl.updateTodo(editTodoCtrl.editedTodo)" novalidate>
+  <div class="form-group">
+    <label>Todo Title</label>
+    <input type="text" class="form-control" ng-model="editTodoCtrl.editedTodo.title" placeholder="Enter title" ng-minlength="10" required>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-lg">Save</button>
+  <button type="button" class="btn btn-default btn-lg pull-right" ng-click="editTodoCtrl.cancelEditing()">Cancel</button>
+</form>

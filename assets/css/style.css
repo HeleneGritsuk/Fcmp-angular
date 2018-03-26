@@ -5,11 +5,15 @@ body {
     height: 100%;
     color: #4F534E;
 }
-
+h1 {
+  text-align: center;
+  margin-top: 85px;
+}
 a {
     color: #373A36;
     font-size: 24px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:hover {
@@ -29,6 +33,9 @@ a:hover {
 .todo-item {
   min-width: 375px;
   display: inline-block;
+}
+.todo-item--done {
+  text-decoration: line-through;
 }
 .search-form {
   width: 500px;
