@@ -3,7 +3,7 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input type="text" class="form-control" placeholder="Search by number of days" ng-model="searchQuery">
+        <input type="text" class="form-control" placeholder="Search by number of days" ng-model="todosCtrl.searchQuery">
       </div>
     </div>
   </form>
@@ -20,7 +20,8 @@
   </a>
 </div>
 <div>Done todos</div>
-<div ng-repeat="todo in todosCtrl.todos | orderBy :sortType : sortReverse | filter:{status: true} | filter: filterDate  ">
+<div ng-repeat="todo in todosCtrl.todos | orderBy :sortType : sortReverse | filter:{status: true} | filter: todosCtrl.filterDate
+  ">
   <div>
     <button type="button" class="close" ng-click="todosCtrl.deleteTodo(todo)">&times;</button>
     <button type="button" class="btn btn-link" ui-sref="myapp.todos.edit({todoId: todo.id})"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -29,7 +30,7 @@
   </div>
 </div>
 <div>New todos</div>
-<div ng-repeat="todo in todosCtrl.todos | orderBy :sortType : sortReverse | filter:{status:false} | filter: filterDate  ">
+<div ng-repeat="todo in todosCtrl.todos | orderBy :sortType : sortReverse | filter:{status:false} | filter: todosCtrl.filterDate  ">
   <div>
     <button type="button" class="close" ng-click="todosCtrl.deleteTodo(todo)">&times;</button>
     <button type="button" class="btn btn-link" ui-sref="myapp.todos.edit({todoId: todo.id})"><span class="glyphicon glyphicon-pencil"></span></button>

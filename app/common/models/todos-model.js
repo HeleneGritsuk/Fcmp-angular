@@ -30,6 +30,10 @@ angular.module('myapp.models.todos', [])
       todos[index].status = !todo.status;
     }
 
+    model.filterTodosByDate = function(obj, searchQuery) {
+      return Math.round((new Date() - new Date(obj.date)) / (1000 * 60 * 60 * 24)) >= searchQuery;
+    }
+
     model.getTodos = function() {
       return (todos) ? $q.when(todos) : $http.get(URLS.FETCH).then(cacheTodos);
     };

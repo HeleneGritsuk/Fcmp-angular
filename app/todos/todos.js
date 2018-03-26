@@ -17,15 +17,18 @@ angular.module('todos', [
               }
           })
   })
-  .controller('TodosCtrl', function ($stateParams, TodosModel){
+  .controller('TodosCtrl', function ($stateParams, TodosModel, $scope) {
     var todosCtrl = this;
-
 
     TodosModel.getTodos()
       .then(function(todos){
         todosCtrl.todos = todos;
     });
 
+    todosCtrl.searchQuery='';
+    todosCtrl.filterDate = function(obj) {
+        return TodosModel.filterTodosByDate(obj, todosCtrl.searchQuery );
+    }
     todosCtrl.deleteTodo = TodosModel.deleteTodo;
     todosCtrl.toggleTodo = TodosModel.toggleTodo;
   })
