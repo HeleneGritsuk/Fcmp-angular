@@ -1,0 +1,11 @@
+<h3 class="is-size-3">Article amount: {{ posts.length }}</h3>
+<br>
+<section>
+  <article class="media box" ng-repeat="post in posts ">
+    <div>
+      <a class="todo-item" href="#!/{{post._id}}">{{post.title}}</a>
+      <p>Published at: {{post.date | date:"yyyy-MM-dd"}}</p>
+    </div>
+
+  </article>
+</section>

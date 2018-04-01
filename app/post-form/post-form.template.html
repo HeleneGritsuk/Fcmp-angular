@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-5">
+    <form name="postForm" ng-submit="$ctrl.onSubmit(postText)" novalidate>
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input class="input form-control" type="text" placeholder="Title" name="title" ng-model="$ctrl.post.title" ng-model-options="{ updateOn: 'blur' }" ng-required="true" ng-minlength="5">
+        </div>
+        <div ng-show="postForm.$submitted">
+          <p class="help is-danger" ng-show="postForm.title.$error.minlength">Min title length 5 characters.</p>
+          <p class="help is-danger" ng-show="postForm.title.$error.required">Please add title.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control">
+          <textarea class="textarea form-control" placeholder="Description" name="text" ng-model="$ctrl.post.text" ng-model-options="{ updateOn: 'blur' }" ng-required="true" ng-minlength="20"></textarea>
+        </div>
+        <div ng-show="postForm.$submitted">
+          <p class="help is-danger" ng-show="postForm.text.$error.minlength">Min description length 20 characters.</p>
+          <p class="help is-danger" ng-show="postForm.text.$error.required">Please add description.</p>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button class="btn btn-info btn-lg" type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

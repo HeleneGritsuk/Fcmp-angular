@@ -1,0 +1,21 @@
+<div class="row">
+  <div>
+    <div class="col-md-1">
+      <a class="btn btn-link" href="#!/admin/edit/{{$ctrl.post._id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+    <div class="col-md-8">
+      <h2 class="title">{{ $ctrl.post.title }}</h2>
+      <p>
+        <span>{{ $ctrl.post.text }}</span>
+      </p>
+      <p>
+        Published at: {{$ctrl.post.date | date:"yyyy-MM-dd"}}
+      </p>
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="close" ng-click="$ctrl.removePost($ctrl.post._id)">&times;</button>
+    </div>
+
+
+
+  </div>
